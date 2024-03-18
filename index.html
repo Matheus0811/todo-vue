@@ -1,13 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Aritmética</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>Calculadora Aritmética</h1>
+    <input type="number" v-model="num1" @input="calculate">
+    <select v-model="operator" @change="calculate">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <input type="number" v-model="num2" @input="calculate">
+    <p>Resultado: {{ result }}</p>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        num1: 0,
+        num2: 0,
+        operator: '+',
+        result: 0
+      },
+      methods: {
+        calculate: function() {
+          switch(this.operator) {
+            case '+':
+              this.result = parseFloat(this.num1) + parseFloat(this.num2);
+              break;
+            case '-':
+              this.result = parseFloat(this.num1) - parseFloat(this.num2);
+              break;
+            case '*':
+              this.result = parseFloat(this.num1) * parseFloat(this.num2);
+              break;
+            case '/':
+              this.result = parseFloat(this.num1) / parseFloat(this.num2);
+              break;
+          }
+        }
+      }
+    })
+  </script>
+</body>
 </html>
